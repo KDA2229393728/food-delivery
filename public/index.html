@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#fff8eb" />
+  <title>Как Дома — домашнее меню</title>
+  <meta name="description" content="Как Дома — домашнее меню: супы, горячее, салаты, блины, сырники, выпечка и напитки." />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Как Дома">
+      <img src="/images/logo.webp" alt="Логотип Как Дома" class="brand-logo" />
+      <div class="brand-copy">
+        <strong>Как Дома</strong>
+        <span>Домашнее меню</span>
+      </div>
+    </a>
+    <button class="cart-button" id="openCart" type="button" aria-label="Открыть корзину">
+      <span>Корзина</span>
+      <b id="cartCount">0</b>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-logo-wrap">
+        <img src="/images/logo.webp" alt="Как Дома" class="hero-logo" />
+      </div>
+      <div class="hero-copy">
+        <span class="eyebrow">Домашняя кухня</span>
+        <h1>Вкусно, сытно,<br>как дома.</h1>
+        <p>Супы, горячее, салаты, выпечка и домашние напитки — всё в одном меню.</p>
+        <a class="primary-link" href="#menu">Смотреть меню</a>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Меню</span>
+          <h2>Что будем есть?</h2>
+        </div>
+        <p>15 домашних позиций</p>
+      </div>
+
+      <div class="category-tabs" id="categoryTabs" aria-label="Категории меню"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+  </main>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Корзина">
+    <div class="cart-head">
+      <div>
+        <span class="eyebrow">Ваш заказ</span>
+        <h2>Корзина</h2>
+      </div>
+      <button class="icon-button" id="closeCart" type="button" aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-summary">
+      <span>Итого</span>
+      <strong id="cartTotal">0 ₽</strong>
+    </div>
+
+    <form class="order-form" id="orderForm">
+      <input name="name" type="text" placeholder="Имя" autocomplete="name" required />
+      <input name="phone" type="tel" placeholder="Телефон" autocomplete="tel" required />
+      <input name="address" type="text" placeholder="Корпус / общежитие / комната" autocomplete="street-address" required />
+      <textarea name="comment" placeholder="Комментарий к заказу" rows="3"></textarea>
+      <input name="payment" type="hidden" value="Оплата при получении" />
+      <button class="checkout-button" id="submitOrder" type="submit">Оформить заказ</button>
+      <p class="status" id="status" role="status"></p>
+    </form>
+  </aside>
+
+  <footer>
+    <img src="/images/logo.webp" alt="" aria-hidden="true" />
+    <div>
+      <strong>Как Дома</strong>
+      <span>Домашнее меню</span>
+    </div>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
