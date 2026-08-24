@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Доставка еды</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="badge">Доставка еды</div>
+      <h1>Вкусно. Быстро. Прямо к двери.</h1>
+      <p>Выберите блюда, добавьте в корзину и оформите заказ за пару минут.</p>
+    </div>
+    <button class="cart-button" id="openCart">
+      Корзина <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="categories" id="categories"></section>
+    <section class="menu" id="menu"></section>
+  </main>
+
+  <aside class="cart" id="cart">
+    <div class="cart-panel">
+      <div class="cart-head">
+        <h2>Ваш заказ</h2>
+        <button id="closeCart" class="icon-btn">✕</button>
+      </div>
+
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-total">
+        <span>Итого</span>
+        <strong><span id="cartTotal">0</span> ₽</strong>
+      </div>
+
+      <form id="orderForm">
+        <input name="name" placeholder="Ваше имя" required />
+        <input name="phone" placeholder="Телефон" required />
+        <input name="address" placeholder="Адрес доставки" required />
+        <textarea name="comment" placeholder="Комментарий к заказу"></textarea>
+        <select name="payment" required>
+          <option value="Оплата при получении">Оплата при получении</option>
+          <option value="Перевод">Перевод</option>
+        </select>
+        <button class="primary" type="submit">Оформить заказ</button>
+        <p class="status" id="status"></p>
+      </form>
+    </div>
+  </aside>
+
+  <script src="/app.js"></script>
+</body>
+</html>
