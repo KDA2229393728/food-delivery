@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#fff8eb" />
+  <title>Абонементы на неделю — Как Дома</title>
+  <meta name="description" content="Абонементы «Как Дома»: готовые домашние обеды на 5 или 7 дней." />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/subscriptions.css" />
+</head>
+<body>
+  <header class="site-header-wrap">
+    <div class="site-header">
+      <a class="brand" href="/" aria-label="Как Дома — на главную">
+        <img src="/images/logo.webp" alt="Логотип Как Дома" class="brand-logo" />
+        <div class="brand-copy">
+          <strong>Как Дома</strong>
+          <span>Домашняя кухня</span>
+        </div>
+      </a>
+
+      <nav class="main-nav subscriptions-nav" aria-label="Навигация">
+        <a href="/">Главная</a>
+        <a href="/#menu">Меню</a>
+        <a href="/subscriptions.html" aria-current="page">Абонементы</a>
+        <a href="/#reviews">Отзывы</a>
+      </nav>
+
+      <a class="subs-header-button" href="#plans">Выбрать</a>
+    </div>
+  </header>
+
+  <main class="subscriptions-main" id="top">
+    <section class="subs-hero">
+      <div class="subs-hero-copy">
+        <span class="eyebrow">Абонементы «Как Дома»</span>
+        <h1>Неделя без готовки.<br><span>Еда уже продумана.</span></h1>
+        <p>
+          Выберите подходящий формат на 5 или 7 дней. Каждый день — знакомая домашняя еда,
+          а меню чередуется, чтобы не надоедало.
+        </p>
+        <div class="subs-hero-actions">
+          <a class="primary-link" href="#plans">Выбрать абонемент</a>
+          <a class="secondary-link" href="/">Вернуться в меню</a>
+        </div>
+        <div class="subs-benefits">
+          <span>📅 5 или 7 дней</span>
+          <span>🍲 Домашняя кухня</span>
+          <span>💬 Заявка сразу в Telegram</span>
+        </div>
+      </div>
+
+      <div class="subs-hero-card" aria-hidden="true">
+        <div class="calendar-card">
+          <div class="calendar-top">
+            <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span>
+          </div>
+          <div class="calendar-meals">
+            <b>🍲</b><b>🍝</b><b>🥗</b><b>🍛</b><b>🥞</b>
+          </div>
+          <div class="calendar-copy">
+            <strong>5 дней</strong>
+            <span>без вопроса «что сегодня есть?»</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans-section" id="plans">
+      <div class="plans-heading">
+        <div>
+          <span class="eyebrow">5 вариантов</span>
+          <h2>Выберите свою неделю</h2>
+        </div>
+        <p>Стоимость указана за весь абонемент.</p>
+      </div>
+
+      <div class="plans-grid">
+        <article class="plan-card">
+          <div class="plan-icon">🎓</div>
+          <span class="plan-days">5 дней</span>
+          <h3>Студенческий</h3>
+          <p class="plan-description">Недорогой вариант на каждый будний день.</p>
+          <div class="plan-price"><strong>1 990 ₽</strong><span>398 ₽ / день</span></div>
+          <ul>
+            <li>1 горячее блюдо</li>
+            <li>Гарнир</li>
+            <li>5 разных обедов</li>
+          </ul>
+          <button class="plan-button" type="button" data-plan="student">Выбрать</button>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-icon">🍲</div>
+          <span class="plan-days">5 дней</span>
+          <h3>Домашний обед</h3>
+          <p class="plan-description">Классический полноценный обед на рабочую неделю.</p>
+          <div class="plan-price"><strong>2 990 ₽</strong><span>598 ₽ / день</span></div>
+          <ul>
+            <li>Суп</li>
+            <li>Горячее блюдо</li>
+            <li>Гарнир</li>
+          </ul>
+          <button class="plan-button" type="button" data-plan="home-lunch">Выбрать</button>
+        </article>
+
+        <article class="plan-card plan-card-featured">
+          <span class="popular-badge">Самый популярный</span>
+          <div class="plan-icon">🏠</div>
+          <span class="plan-days">5 дней</span>
+          <h3>Как дома</h3>
+          <p class="plan-description">Полный домашний обед с салатом и напитком.</p>
+          <div class="plan-price"><strong>3 790 ₽</strong><span>758 ₽ / день</span></div>
+          <ul>
+            <li>Суп</li>
+            <li>Горячее + гарнир</li>
+            <li>Салат</li>
+            <li>Компот или морс</li>
+          </ul>
+          <button class="plan-button" type="button" data-plan="kak-doma">Выбрать</button>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-icon">💪</div>
+          <span class="plan-days">7 дней</span>
+          <h3>Сытная неделя</h3>
+          <p class="plan-description">Для тех, кому хочется плотнее и на все семь дней.</p>
+          <div class="plan-price"><strong>4 990 ₽</strong><span>≈ 713 ₽ / день</span></div>
+          <ul>
+            <li>Увеличенное горячее</li>
+            <li>Гарнир</li>
+            <li>Салат</li>
+            <li>Напиток</li>
+          </ul>
+          <button class="plan-button" type="button" data-plan="big-week">Выбрать</button>
+        </article>
+
+        <article class="plan-card">
+          <div class="plan-icon">👑</div>
+          <span class="plan-days">7 дней</span>
+          <h3>Всё включено</h3>
+          <p class="plan-description">Максимальный набор: от супа до домашней выпечки.</p>
+          <div class="plan-price"><strong>6 490 ₽</strong><span>≈ 927 ₽ / день</span></div>
+          <ul>
+            <li>Суп</li>
+            <li>Горячее + гарнир</li>
+            <li>Салат</li>
+            <li>Выпечка или десерт</li>
+            <li>Напиток</li>
+          </ul>
+          <button class="plan-button" type="button" data-plan="all-inclusive">Выбрать</button>
+        </article>
+      </div>
+
+      <p class="plans-note">
+        Блюда внутри абонемента чередуются по дням. Пожелания и ограничения можно указать при оформлении.
+      </p>
+    </section>
+
+    <section class="subscription-order" id="subscriptionOrder">
+      <div class="subscription-order-copy">
+        <span class="eyebrow">Оформление</span>
+        <h2>Заявка на абонемент</h2>
+        <p>Выберите тариф, укажите дату начала и контакты. Заявка придёт нам сразу.</p>
+
+        <div class="selected-plan-card" id="selectedPlanCard">
+          <span>Выбранный абонемент</span>
+          <strong id="selectedPlanName">Как дома</strong>
+          <b id="selectedPlanPrice">3 790 ₽</b>
+        </div>
+      </div>
+
+      <form class="subscription-form" id="subscriptionForm">
+        <label>
+          Абонемент
+          <select id="subscriptionPlan" name="plan" required>
+            <option value="student">Студенческий — 1 990 ₽</option>
+            <option value="home-lunch">Домашний обед — 2 990 ₽</option>
+            <option value="kak-doma" selected>Как дома — 3 790 ₽</option>
+            <option value="big-week">Сытная неделя — 4 990 ₽</option>
+            <option value="all-inclusive">Всё включено — 6 490 ₽</option>
+          </select>
+        </label>
+
+        <div class="subscription-form-row">
+          <label>
+            Ваше имя
+            <input id="subscriptionName" type="text" maxlength="60" placeholder="Например, Данил" autocomplete="name" required />
+          </label>
+          <label>
+            Телефон
+            <input id="subscriptionPhone" type="tel" maxlength="30" placeholder="+7 900 000-00-00" autocomplete="tel" required />
+          </label>
+        </div>
+
+        <label>
+          Адрес
+          <input id="subscriptionAddress" type="text" maxlength="160" placeholder="Корпус / общежитие / комната" autocomplete="street-address" required />
+        </label>
+
+        <label>
+          Дата начала
+          <input id="subscriptionStartDate" type="date" required />
+        </label>
+
+        <label>
+          Пожелания
+          <textarea id="subscriptionComment" maxlength="500" rows="4" placeholder="Например: без лука, не люблю гречку"></textarea>
+        </label>
+
+        <div class="subscription-payment">
+          <span>Оплата</span>
+          <strong>При получении / по договорённости</strong>
+        </div>
+
+        <button class="subscription-submit" id="subscriptionSubmit" type="submit">Оформить абонемент</button>
+        <p class="subscription-status" id="subscriptionStatus" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="subs-faq">
+      <span class="eyebrow">Важно знать</span>
+      <h2>Как это работает</h2>
+      <div class="faq-grid">
+        <article><b>1</b><h3>Выбираете</h3><p>Подбираете вариант на 5 или 7 дней.</p></article>
+        <article><b>2</b><h3>Оставляете заявку</h3><p>Указываете контакты, адрес и день начала.</p></article>
+        <article><b>3</b><h3>Подтверждаем</h3><p>Связываемся с вами и уточняем детали меню.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="/images/logo.webp" alt="" aria-hidden="true" />
+      <div>
+        <strong>Как Дома</strong>
+        <span>Домашняя кухня</span>
+      </div>
+    </div>
+    <p>Вкусно, сытно, как дома.</p>
+  </footer>
+
+  <script src="/subscriptions.js" defer></script>
+</body>
+</html>
