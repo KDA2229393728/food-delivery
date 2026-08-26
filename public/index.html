@@ -7,6 +7,7 @@
   <title>Как Дома — домашнее меню</title>
   <meta name="description" content="Как Дома — домашняя кухня: супы, горячее, салаты, завтраки, выпечка и напитки." />
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/reviews.css" />
 </head>
 <body>
   <header class="site-header-wrap">
@@ -23,6 +24,7 @@
         <a href="#menu">Меню</a>
         <a href="#combo">Комбо</a>
         <a href="#week">На неделю</a>
+        <a href="#reviews">Отзывы</a>
       </nav>
 
       <button class="cart-button" id="openCart" type="button" aria-label="Открыть корзину">
@@ -76,6 +78,58 @@
       <div class="category-tabs" id="categoryTabs" aria-label="Категории меню"></div>
       <div class="menu-grid" id="menuGrid"></div>
     </section>
+
+    <section class="reviews-section" id="reviews">
+      <div class="reviews-heading">
+        <div>
+          <span class="eyebrow">Отзывы</span>
+          <h2>Что говорят о «Как Дома»</h2>
+          <p>Оставьте впечатление о заказе — нам важно ваше мнение.</p>
+        </div>
+
+        <div class="reviews-rating" aria-label="Средняя оценка">
+          <strong id="reviewsAverage">5.0</strong>
+          <span class="reviews-rating-stars" aria-hidden="true">★★★★★</span>
+          <small id="reviewsCount">3 отзыва</small>
+        </div>
+      </div>
+
+      <div class="reviews-grid" id="reviewsList"></div>
+
+      <div class="review-form-card">
+        <div class="review-form-copy">
+          <span class="eyebrow">Ваше мнение</span>
+          <h3>Оставить отзыв</h3>
+          <p>Расскажите, что вам понравилось. Отзыв появится сразу после отправки.</p>
+        </div>
+
+        <form class="review-form" id="reviewForm">
+          <label>
+            Ваше имя
+            <input id="reviewName" type="text" maxlength="40" placeholder="Например, Анна" required />
+          </label>
+
+          <fieldset class="rating-field">
+            <legend>Ваша оценка</legend>
+            <div class="star-picker" id="starPicker" aria-label="Выберите оценку">
+              <button type="button" data-rating="1" aria-label="1 звезда">★</button>
+              <button type="button" data-rating="2" aria-label="2 звезды">★</button>
+              <button type="button" data-rating="3" aria-label="3 звезды">★</button>
+              <button type="button" data-rating="4" aria-label="4 звезды">★</button>
+              <button type="button" data-rating="5" aria-label="5 звезд">★</button>
+            </div>
+          </fieldset>
+
+          <label>
+            Отзыв
+            <textarea id="reviewText" rows="5" maxlength="500" placeholder="Напишите пару слов о заказе..." required></textarea>
+          </label>
+
+          <button class="review-submit" type="submit">Оставить отзыв</button>
+          <p class="review-success" id="reviewSuccess" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <div class="overlay" id="overlay" hidden></div>
@@ -124,5 +178,6 @@
   </footer>
 
   <script src="/app.js" defer></script>
+  <script src="/reviews.js" defer></script>
 </body>
 </html>
