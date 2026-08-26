@@ -4,10 +4,73 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
+const https = require("https");
 
 const app = express();
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(path.join(__dirname, "public")));
+
+
+function sendTelegramMessage(token, chatId, text) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      chat_id: chatId,
+      text
+    });
+
+    const req = https.request(
+      {
+        hostname: "api.telegram.org",
+        port: 443,
+        path: `/bot${token}/sendMessage`,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(body)
+        }
+      },
+      (response) => {
+        let data = "";
+
+        response.setEncoding("utf8");
+        response.on("data", (chunk) => {
+          data += chunk;
+        });
+
+        response.on("end", () => {
+          try {
+            const result = JSON.parse(data || "{}");
+
+            if (
+              response.statusCode >= 200 &&
+              response.statusCode < 300 &&
+              result.ok
+            ) {
+              resolve(result);
+              return;
+            }
+
+            reject(
+              new Error(
+                `Telegram API: ${result.description || `HTTP ${response.statusCode}`}`
+              )
+            );
+          } catch (error) {
+            reject(new Error(`Некорректный ответ Telegram: ${error.message}`));
+          }
+        });
+      }
+    );
+
+    req.setTimeout(15000, () => {
+      req.destroy(new Error("Telegram timeout"));
+    });
+
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
 
 const REVIEWS_FILE = process.env.REVIEWS_FILE || path.join(__dirname, "data", "reviews.json");
 
@@ -245,23 +308,12 @@ app.post("/api/subscription", async (req, res) => {
 🚀 Начало: ${startDate}
 💬 Пожелания: ${comment || "—"}`;
 
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text })
-    });
-
-    const tgData = await tgRes.json();
-
-    if (!tgData.ok) {
-      console.error(tgData);
-      return res.status(500).json({ error: "Telegram API error" });
-    }
+    await sendTelegramMessage(token, chatId, text);
 
     res.json({ ok: true });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
+    console.error("Subscription error:", error);
+    res.status(500).json({ error: "Не удалось отправить заявку. Проверьте Telegram." });
   }
 });
 
@@ -297,22 +349,12 @@ ${lines}
       return res.status(500).json({ error: "Telegram не настроен" });
     }
 
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text })
-    });
-
-    const tgData = await tgRes.json();
-    if (!tgData.ok) {
-      console.error(tgData);
-      return res.status(500).json({ error: "Telegram API error" });
-    }
+    await sendTelegramMessage(token, chatId, text);
 
     res.json({ ok: true });
   } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: "Server error" });
+    console.error("Order error:", e);
+    res.status(500).json({ error: "Не удалось отправить заказ. Проверьте Telegram." });
   }
 });
 
