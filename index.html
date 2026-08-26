@@ -1,290 +1,183 @@
-/* Раздел отзывов — дополнение к основному style.css */
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#fff8eb" />
+  <title>Как Дома — домашнее меню</title>
+  <meta name="description" content="Как Дома — домашняя кухня: супы, горячее, салаты, завтраки, выпечка и напитки." />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/reviews.css" />
+</head>
+<body>
+  <header class="site-header-wrap">
+    <div class="site-header">
+      <a class="brand" href="#top" aria-label="Как Дома">
+        <img src="/images/logo.webp" alt="Логотип Как Дома" class="brand-logo" />
+        <div class="brand-copy">
+          <strong>Как Дома</strong>
+          <span>Домашняя кухня</span>
+        </div>
+      </a>
 
-.reviews-section {
-  padding-top: 90px;
-  scroll-margin-top: 110px;
-}
+      <nav class="main-nav" aria-label="Навигация">
+        <a href="#menu">Меню</a>
+        <a href="#combo">Комбо</a>
+        <a href="#week">На неделю</a>
+        <a href="#reviews">Отзывы</a>
+      </nav>
 
-.reviews-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 28px;
-  margin-bottom: 28px;
-}
+      <button class="cart-button" id="openCart" type="button" aria-label="Открыть корзину">
+        <span class="cart-icon">🧺</span>
+        <span class="cart-button-copy">
+          <b>Корзина</b>
+          <small id="cartButtonTotal">0 ₽</small>
+        </span>
+        <em id="cartCount">0</em>
+      </button>
+    </div>
+  </header>
 
-.reviews-heading h2 {
-  margin: 7px 0 10px;
-  font-size: clamp(36px, 4.4vw, 56px);
-  line-height: 1;
-  letter-spacing: -.045em;
-}
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Домашняя кухня</span>
+        <h1>Вкусно, сытно,<br><span>как дома.</span></h1>
+        <p class="hero-lead">Знакомые домашние блюда из понятных продуктов — готовим каждый день с заботой.</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#menu">Выбрать блюда</a>
+          <a class="secondary-link" href="#combo">Посмотреть комбо</a>
+        </div>
+        <div class="hero-points" aria-label="Преимущества">
+          <span>🍲 Домашние рецепты</span>
+          <span>🌿 Понятный состав</span>
+          <span>🔥 Готовим каждый день</span>
+        </div>
+      </div>
 
-.reviews-heading p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
+      <div class="hero-visual" aria-hidden="true">
+        <span class="hero-orbit hero-orbit-one"></span>
+        <span class="hero-orbit hero-orbit-two"></span>
+        <div class="hero-logo-card">
+          <img src="/images/logo.webp" alt="" class="hero-logo" />
+        </div>
+        <div class="hero-note hero-note-top"><b>15</b><span>домашних блюд</span></div>
+        <div class="hero-note hero-note-bottom"><b>★ 4.9</b><span>по-домашнему</span></div>
+      </div>
+    </section>
 
-.reviews-rating {
-  min-width: 190px;
-  padding: 19px 22px;
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  border-radius: 24px;
-  border: 1px solid rgba(100,70,45,.10);
-  background: rgba(255,255,255,.82);
-  box-shadow: var(--shadow-soft);
-}
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Меню</span>
+          <h2>Что будем есть?</h2>
+        </div>
+        <p>15 блюд, приготовленных как дома</p>
+      </div>
 
-.reviews-rating strong {
-  font-size: 36px;
-  line-height: 1;
-}
+      <div class="category-tabs" id="categoryTabs" aria-label="Категории меню"></div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
 
-.reviews-rating-stars {
-  color: #f3aa2c;
-  letter-spacing: .12em;
-  font-size: 18px;
-}
+    <section class="reviews-section" id="reviews">
+      <div class="reviews-heading">
+        <div>
+          <span class="eyebrow">Отзывы</span>
+          <h2>Что говорят о «Как Дома»</h2>
+          <p>Оставьте впечатление о заказе — нам важно ваше мнение.</p>
+        </div>
 
-.reviews-rating small {
-  color: var(--muted);
-  font-weight: 700;
-}
+        <div class="reviews-rating" aria-label="Средняя оценка">
+          <strong id="reviewsAverage">5.0</strong>
+          <span class="reviews-rating-stars" aria-hidden="true">★★★★★</span>
+          <small id="reviewsCount">3 отзыва</small>
+        </div>
+      </div>
 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
+      <div class="reviews-grid" id="reviewsList"></div>
 
-.review-card {
-  min-width: 0;
-  padding: 24px;
-  border-radius: 26px;
-  border: 1px solid rgba(100,70,45,.09);
-  background: var(--paper);
-  box-shadow: var(--shadow-soft);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
+      <div class="review-form-card">
+        <div class="review-form-copy">
+          <span class="eyebrow">Ваше мнение</span>
+          <h3>Оставить отзыв</h3>
+          <p>Расскажите, что вам понравилось. Отзыв появится сразу после отправки.</p>
+        </div>
 
-.review-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 46px rgba(75,45,25,.12);
-}
+        <form class="review-form" id="reviewForm">
+          <label>
+            Ваше имя
+            <input id="reviewName" type="text" maxlength="40" placeholder="Например, Анна" required />
+          </label>
 
-.review-card-head {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+          <fieldset class="rating-field">
+            <legend>Ваша оценка</legend>
+            <div class="star-picker" id="starPicker" aria-label="Выберите оценку">
+              <button type="button" data-rating="1" aria-label="1 звезда">★</button>
+              <button type="button" data-rating="2" aria-label="2 звезды">★</button>
+              <button type="button" data-rating="3" aria-label="3 звезды">★</button>
+              <button type="button" data-rating="4" aria-label="4 звезды">★</button>
+              <button type="button" data-rating="5" aria-label="5 звезд">★</button>
+            </div>
+          </fieldset>
 
-.review-avatar {
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--gold-soft);
-  color: var(--brown);
-  font-weight: 900;
-  font-size: 18px;
-}
+          <label>
+            Отзыв
+            <textarea id="reviewText" rows="5" maxlength="500" placeholder="Напишите пару слов о заказе..." required></textarea>
+          </label>
 
-.review-person {
-  min-width: 0;
-  display: grid;
-  gap: 2px;
-}
+          <button class="review-submit" type="submit">Оставить отзыв</button>
+          <p class="review-success" id="reviewSuccess" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
 
-.review-person strong {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Корзина">
+    <div class="cart-head">
+      <div>
+        <span class="eyebrow">Ваш заказ</span>
+        <h2>Корзина</h2>
+      </div>
+      <button class="icon-button" id="closeCart" type="button" aria-label="Закрыть">×</button>
+    </div>
 
-.review-person small {
-  color: var(--muted);
-}
+    <div class="cart-items" id="cartItems"></div>
 
-.review-stars {
-  margin-top: 16px;
-  color: #f3aa2c;
-  letter-spacing: .12em;
-  font-size: 17px;
-}
+    <div class="cart-summary-card">
+      <div class="cart-summary">
+        <span>Итого</span>
+        <strong id="cartTotal">0 ₽</strong>
+      </div>
+      <p>Проверьте состав заказа и заполните данные ниже.</p>
+    </div>
 
-.review-card p {
-  margin: 13px 0 0;
-  color: #654f40;
-  line-height: 1.65;
-  overflow-wrap: anywhere;
-}
+    <form class="order-form" id="orderForm">
+      <label>Ваше имя<input name="name" type="text" placeholder="Например, Данил" autocomplete="name" required /></label>
+      <label>Телефон<input name="phone" type="tel" placeholder="+7 900 000-00-00" autocomplete="tel" required /></label>
+      <label>Куда принести<input name="address" type="text" placeholder="Корпус / общежитие / комната" autocomplete="street-address" required /></label>
+      <label>Комментарий<textarea name="comment" placeholder="Например: без лука" rows="3"></textarea></label>
+      <input name="payment" type="hidden" value="Оплата при получении" />
+      <div class="payment-row"><span>Оплата</span><b>При получении</b></div>
+      <button class="checkout-button" id="submitOrder" type="submit">Оформить заказ</button>
+      <p class="status" id="status" role="status"></p>
+    </form>
+  </aside>
 
-.review-form-card {
-  margin-top: 28px;
-  padding: 34px;
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 38px;
-  border-radius: 32px;
-  border: 1px solid rgba(100,70,45,.09);
-  background:
-    radial-gradient(circle at 8% 0%, rgba(244,188,75,.18), transparent 19rem),
-    var(--paper);
-  box-shadow: var(--shadow-soft);
-}
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-.review-form-copy h3 {
-  margin: 7px 0 10px;
-  font-size: 34px;
-  letter-spacing: -.035em;
-}
+  <footer>
+    <div class="footer-brand">
+      <img src="/images/logo.webp" alt="" aria-hidden="true" />
+      <div>
+        <strong>Как Дома</strong>
+        <span>Домашняя кухня</span>
+      </div>
+    </div>
+    <p>Вкусно, сытно, как дома.</p>
+  </footer>
 
-.review-form-copy p {
-  margin: 0;
-  max-width: 390px;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-.review-form {
-  display: grid;
-  gap: 17px;
-}
-
-.review-form label,
-.rating-field {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: 800;
-  color: #4f392c;
-}
-
-.rating-field legend {
-  padding: 0;
-  margin-bottom: 8px;
-  font-weight: 800;
-}
-
-.review-form input,
-.review-form textarea {
-  width: 100%;
-  padding: 14px 15px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: #fff;
-  color: var(--ink);
-  outline: none;
-  transition: border-color .18s ease, box-shadow .18s ease;
-}
-
-.review-form textarea {
-  resize: vertical;
-  min-height: 118px;
-}
-
-.review-form input:focus,
-.review-form textarea:focus {
-  border-color: rgba(184,90,49,.58);
-  box-shadow: 0 0 0 4px rgba(184,90,49,.09);
-}
-
-.star-picker {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.star-picker button {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #ddd0bb;
-  cursor: pointer;
-  font-size: 34px;
-  line-height: 1;
-  transition: transform .15s ease, color .15s ease;
-}
-
-.star-picker button:hover {
-  transform: translateY(-2px);
-}
-
-.star-picker button.active {
-  color: #f3aa2c;
-}
-
-.review-submit {
-  min-height: 50px;
-  padding: 0 22px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--brown);
-  color: #fff;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 12px 24px rgba(88,46,24,.16);
-  transition: transform .18s ease, background .18s ease;
-}
-
-.review-submit:hover {
-  transform: translateY(-1px);
-  background: var(--brown-dark);
-}
-
-.review-success {
-  min-height: 20px;
-  margin: -5px 0 0;
-  color: var(--green);
-  font-weight: 800;
-}
-
-@media (max-width: 900px) {
-  .reviews-heading {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .reviews-rating {
-    justify-self: start;
-  }
-
-  .reviews-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .review-form-card {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-}
-
-@media (max-width: 620px) {
-  .reviews-section {
-    padding-top: 64px;
-  }
-
-  .review-form-card {
-    padding: 24px 18px;
-    border-radius: 26px;
-  }
-
-  .review-card {
-    padding: 20px;
-  }
-
-  .reviews-rating {
-    width: 100%;
-  }
-
-  .star-picker button {
-    font-size: 31px;
-  }
-}
+  <script src="/app.js" defer></script>
+  <script src="/reviews.js" defer></script>
+</body>
+</html>

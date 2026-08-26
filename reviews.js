@@ -1,183 +1,164 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#fff8eb" />
-  <title>Как Дома — домашнее меню</title>
-  <meta name="description" content="Как Дома — домашняя кухня: супы, горячее, салаты, завтраки, выпечка и напитки." />
-  <link rel="stylesheet" href="/style.css" />
-  <link rel="stylesheet" href="/reviews.css" />
-</head>
-<body>
-  <header class="site-header-wrap">
-    <div class="site-header">
-      <a class="brand" href="#top" aria-label="Как Дома">
-        <img src="/images/logo.webp" alt="Логотип Как Дома" class="brand-logo" />
-        <div class="brand-copy">
-          <strong>Как Дома</strong>
-          <span>Домашняя кухня</span>
-        </div>
-      </a>
+(() => {
+  const STORAGE_KEY = "kakDomaReviewsV1";
 
-      <nav class="main-nav" aria-label="Навигация">
-        <a href="#menu">Меню</a>
-        <a href="#combo">Комбо</a>
-        <a href="#week">На неделю</a>
-        <a href="#reviews">Отзывы</a>
-      </nav>
+  const defaultReviews = [
+    {
+      name: "Анна",
+      rating: 5,
+      text: "Очень вкусно! Всё действительно по-домашнему. Борщ отличный, а котлета с пюре вообще как дома ❤️",
+      date: "Сегодня"
+    },
+    {
+      name: "Максим",
+      rating: 5,
+      text: "Заказ приехал аккуратно упакованным. Порции хорошие, еда горячая. Буду заказывать ещё.",
+      date: "Вчера"
+    },
+    {
+      name: "Екатерина",
+      rating: 5,
+      text: "Очень понравились сырники и блины. Вкусная домашняя еда без ощущения обычного фастфуда.",
+      date: "2 дня назад"
+    }
+  ];
 
-      <button class="cart-button" id="openCart" type="button" aria-label="Открыть корзину">
-        <span class="cart-icon">🧺</span>
-        <span class="cart-button-copy">
-          <b>Корзина</b>
-          <small id="cartButtonTotal">0 ₽</small>
-        </span>
-        <em id="cartCount">0</em>
-      </button>
-    </div>
-  </header>
+  const list = document.getElementById("reviewsList");
+  const form = document.getElementById("reviewForm");
+  const nameInput = document.getElementById("reviewName");
+  const textInput = document.getElementById("reviewText");
+  const averageEl = document.getElementById("reviewsAverage");
+  const countEl = document.getElementById("reviewsCount");
+  const successEl = document.getElementById("reviewSuccess");
+  const starButtons = Array.from(document.querySelectorAll("#starPicker button"));
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">Домашняя кухня</span>
-        <h1>Вкусно, сытно,<br><span>как дома.</span></h1>
-        <p class="hero-lead">Знакомые домашние блюда из понятных продуктов — готовим каждый день с заботой.</p>
-        <div class="hero-actions">
-          <a class="primary-link" href="#menu">Выбрать блюда</a>
-          <a class="secondary-link" href="#combo">Посмотреть комбо</a>
-        </div>
-        <div class="hero-points" aria-label="Преимущества">
-          <span>🍲 Домашние рецепты</span>
-          <span>🌿 Понятный состав</span>
-          <span>🔥 Готовим каждый день</span>
-        </div>
-      </div>
+  if (!list || !form || !nameInput || !textInput || !averageEl || !countEl) return;
 
-      <div class="hero-visual" aria-hidden="true">
-        <span class="hero-orbit hero-orbit-one"></span>
-        <span class="hero-orbit hero-orbit-two"></span>
-        <div class="hero-logo-card">
-          <img src="/images/logo.webp" alt="" class="hero-logo" />
-        </div>
-        <div class="hero-note hero-note-top"><b>15</b><span>домашних блюд</span></div>
-        <div class="hero-note hero-note-bottom"><b>★ 4.9</b><span>по-домашнему</span></div>
-      </div>
-    </section>
+  let selectedRating = 5;
+  let reviews = loadReviews();
 
-    <section class="menu-section" id="menu">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">Меню</span>
-          <h2>Что будем есть?</h2>
-        </div>
-        <p>15 блюд, приготовленных как дома</p>
-      </div>
+  function loadReviews() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (Array.isArray(saved) && saved.length) return saved;
+    } catch (_) {}
+    return [...defaultReviews];
+  }
 
-      <div class="category-tabs" id="categoryTabs" aria-label="Категории меню"></div>
-      <div class="menu-grid" id="menuGrid"></div>
-    </section>
+  function saveReviews() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+    } catch (_) {}
+  }
 
-    <section class="reviews-section" id="reviews">
-      <div class="reviews-heading">
-        <div>
-          <span class="eyebrow">Отзывы</span>
-          <h2>Что говорят о «Как Дома»</h2>
-          <p>Оставьте впечатление о заказе — нам важно ваше мнение.</p>
-        </div>
+  function reviewWord(count) {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return "отзыв";
+    if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return "отзыва";
+    return "отзывов";
+  }
 
-        <div class="reviews-rating" aria-label="Средняя оценка">
-          <strong id="reviewsAverage">5.0</strong>
-          <span class="reviews-rating-stars" aria-hidden="true">★★★★★</span>
-          <small id="reviewsCount">3 отзыва</small>
-        </div>
-      </div>
+  function stars(rating) {
+    return "★".repeat(rating) + "☆".repeat(5 - rating);
+  }
 
-      <div class="reviews-grid" id="reviewsList"></div>
+  function makeCard(review) {
+    const article = document.createElement("article");
+    article.className = "review-card";
 
-      <div class="review-form-card">
-        <div class="review-form-copy">
-          <span class="eyebrow">Ваше мнение</span>
-          <h3>Оставить отзыв</h3>
-          <p>Расскажите, что вам понравилось. Отзыв появится сразу после отправки.</p>
-        </div>
+    const head = document.createElement("div");
+    head.className = "review-card-head";
 
-        <form class="review-form" id="reviewForm">
-          <label>
-            Ваше имя
-            <input id="reviewName" type="text" maxlength="40" placeholder="Например, Анна" required />
-          </label>
+    const avatar = document.createElement("div");
+    avatar.className = "review-avatar";
+    avatar.textContent = (review.name || "?").trim().charAt(0).toUpperCase() || "?";
 
-          <fieldset class="rating-field">
-            <legend>Ваша оценка</legend>
-            <div class="star-picker" id="starPicker" aria-label="Выберите оценку">
-              <button type="button" data-rating="1" aria-label="1 звезда">★</button>
-              <button type="button" data-rating="2" aria-label="2 звезды">★</button>
-              <button type="button" data-rating="3" aria-label="3 звезды">★</button>
-              <button type="button" data-rating="4" aria-label="4 звезды">★</button>
-              <button type="button" data-rating="5" aria-label="5 звезд">★</button>
-            </div>
-          </fieldset>
+    const person = document.createElement("div");
+    person.className = "review-person";
 
-          <label>
-            Отзыв
-            <textarea id="reviewText" rows="5" maxlength="500" placeholder="Напишите пару слов о заказе..." required></textarea>
-          </label>
+    const name = document.createElement("strong");
+    name.textContent = review.name;
 
-          <button class="review-submit" type="submit">Оставить отзыв</button>
-          <p class="review-success" id="reviewSuccess" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
-  </main>
+    const date = document.createElement("small");
+    date.textContent = review.date;
 
-  <div class="overlay" id="overlay" hidden></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Корзина">
-    <div class="cart-head">
-      <div>
-        <span class="eyebrow">Ваш заказ</span>
-        <h2>Корзина</h2>
-      </div>
-      <button class="icon-button" id="closeCart" type="button" aria-label="Закрыть">×</button>
-    </div>
+    person.append(name, date);
+    head.append(avatar, person);
 
-    <div class="cart-items" id="cartItems"></div>
+    const rating = document.createElement("div");
+    rating.className = "review-stars";
+    rating.setAttribute("aria-label", `Оценка ${review.rating} из 5`);
+    rating.textContent = stars(review.rating);
 
-    <div class="cart-summary-card">
-      <div class="cart-summary">
-        <span>Итого</span>
-        <strong id="cartTotal">0 ₽</strong>
-      </div>
-      <p>Проверьте состав заказа и заполните данные ниже.</p>
-    </div>
+    const text = document.createElement("p");
+    text.textContent = review.text;
 
-    <form class="order-form" id="orderForm">
-      <label>Ваше имя<input name="name" type="text" placeholder="Например, Данил" autocomplete="name" required /></label>
-      <label>Телефон<input name="phone" type="tel" placeholder="+7 900 000-00-00" autocomplete="tel" required /></label>
-      <label>Куда принести<input name="address" type="text" placeholder="Корпус / общежитие / комната" autocomplete="street-address" required /></label>
-      <label>Комментарий<textarea name="comment" placeholder="Например: без лука" rows="3"></textarea></label>
-      <input name="payment" type="hidden" value="Оплата при получении" />
-      <div class="payment-row"><span>Оплата</span><b>При получении</b></div>
-      <button class="checkout-button" id="submitOrder" type="submit">Оформить заказ</button>
-      <p class="status" id="status" role="status"></p>
-    </form>
-  </aside>
+    article.append(head, rating, text);
+    return article;
+  }
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  function render() {
+    list.replaceChildren();
 
-  <footer>
-    <div class="footer-brand">
-      <img src="/images/logo.webp" alt="" aria-hidden="true" />
-      <div>
-        <strong>Как Дома</strong>
-        <span>Домашняя кухня</span>
-      </div>
-    </div>
-    <p>Вкусно, сытно, как дома.</p>
-  </footer>
+    [...reviews].reverse().forEach((review) => {
+      list.appendChild(makeCard(review));
+    });
 
-  <script src="/app.js" defer></script>
-  <script src="/reviews.js" defer></script>
-</body>
-</html>
+    const average = reviews.length
+      ? reviews.reduce((sum, review) => sum + Number(review.rating || 0), 0) / reviews.length
+      : 0;
+
+    averageEl.textContent = average.toFixed(1);
+    countEl.textContent = `${reviews.length} ${reviewWord(reviews.length)}`;
+  }
+
+  function paintStars() {
+    starButtons.forEach((button) => {
+      const rating = Number(button.dataset.rating);
+      button.classList.toggle("active", rating <= selectedRating);
+      button.setAttribute("aria-pressed", String(rating === selectedRating));
+    });
+  }
+
+  starButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedRating = Number(button.dataset.rating);
+      paintStars();
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+
+    if (!name || !text) return;
+
+    reviews.push({
+      name,
+      rating: selectedRating,
+      text,
+      date: new Date().toLocaleDateString("ru-RU")
+    });
+
+    saveReviews();
+    render();
+
+    form.reset();
+    selectedRating = 5;
+    paintStars();
+
+    if (successEl) {
+      successEl.textContent = "Спасибо! Ваш отзыв добавлен ❤️";
+      window.setTimeout(() => {
+        successEl.textContent = "";
+      }, 3500);
+    }
+
+    document.getElementById("reviews")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  paintStars();
+  render();
+})();
